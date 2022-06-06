@@ -69,17 +69,17 @@ output$DownloadVS <- downloadHandler(
     content=function(file){   
         if(input$DownVSFormat=='jpeg'){
             jpeg(file, height=input$VHeight, width=input$VWidth)
-            print(static_volcano_plotter())
+            print(volcano_plotter())
             dev.off()
         }
         if(input$DownVSFormat=='png'){
             png(file, height=input$VHeight, width=input$VWidth)
-            print(static_volcano_plotter())
+            print(volcano_plotter())
             dev.off()
         }
         if(input$DownVSFormat=='tiff'){
             tiff(file, height=input$VHeight, width=input$VWidth, res=1000)
-            print(static_volcano_plotter())
+            print(volcano_plotter())
             dev.off()
         }
     }
