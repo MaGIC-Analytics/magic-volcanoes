@@ -45,7 +45,7 @@ InputReactive <- reactive({
         },
         error=function(e)
         {
-            showNotification(id="errorNotify", paste(e$Message), type='error', duration=NULL)
+            showNotification(paste(e), type='error', duration=NULL)
         })
 
     
@@ -55,7 +55,7 @@ InputReactive <- reactive({
         },
         error=function(e)
         {
-            showNotification(id="errorNotify", paste(e$Message), type='error', duration=NULL)
+            showNotification(paste(e), type='error', duration=NULL)
         })
 
     
