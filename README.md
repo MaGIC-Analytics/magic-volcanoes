@@ -1,6 +1,6 @@
 # MaGIC Volcano Plot App
 
-![GitHub last commit](https://img.shields.io/github/last-commit/alemenze/magic-volcanoes)
+![GitHub last commit](https://img.shields.io/github/last-commit/MaGIC-Analytics/magic-volcanoes)
 [![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
 [![made with Shiny](https://img.shields.io/badge/R-Shiny-blue)](https://shiny.rstudio.com/)
 
