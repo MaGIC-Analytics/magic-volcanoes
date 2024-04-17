@@ -1,4 +1,4 @@
-FROM rocker/shiny:4.2.0
+FROM rocker/shiny-verse:4.2.0
 LABEL authors="Alex Lemenze" \
     description="Docker image containing the MaGIC Modules Template."
 
