@@ -50,7 +50,9 @@ volcano_plotter <- reactive({
         drawConnectors=input$Connectors,
         widthConnectors=input$Connectorwidth,
         colConnectors=input$concolor,
-        boxedLabels=input$Boxed
+        boxedLabels=input$Boxed,
+        gridlines.major=input$majorgrid,
+        gridlines.minor=input$minorgrid
     )
 
     return(plot)

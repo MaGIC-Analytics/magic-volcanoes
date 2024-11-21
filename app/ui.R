@@ -174,7 +174,9 @@ tagList(
                             materialSwitch("AdvancedOptions", label="Advanced Options", value=FALSE, right=TRUE, status='info'),
                             conditionalPanel("input.AdvancedOptions",
                                 sliderInput("VpCutoff", "Y axis cutoff lines", min=0.01, max=1, step=0.01, value=0.05),
-                                sliderInput("VFCcutoff", "X axis cutoff lines", min=0, max=10, step=0.25, value=1)                                
+                                sliderInput("VFCcutoff", "X axis cutoff lines", min=0, max=10, step=0.25, value=1),
+                                materialSwitch("majorgrid", label="Major Gridlines", value=TRUE, right=TRUE, status='info'), 
+                                materialSwitch("minorgrid", label="Minor Gridlines", value=TRUE, right=TRUE, status='info')                        
                             ),
                             materialSwitch("Resize", label="Resize Image", value=FALSE, right=TRUE, status='info'),
                             conditionalPanel("input.Resize",
