@@ -14,7 +14,3 @@ docker run -d --rm -p 8080:8080 volcanoes
 ```
 And it should be hosted at localhost:8080
 
-We have also included notes on how to run this via [Cloudrun](https://cloud.google.com/run) as a cost effective testing system, or alternatively as a microservice within a kubernetes cluster.
-
-## Kubernetes deployment
-This app has been designed for kubernetes deployment via Cloudrun as mentioned above or with a dedicated cluster. For the latter, we have implemented a system of managing and running microservices at scale via Rancher. Within the deployment directory, modify the services/ingress as needed for access, and the deployment itself for capacity. 
