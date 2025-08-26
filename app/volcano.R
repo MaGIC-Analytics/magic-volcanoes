@@ -31,29 +31,59 @@ volcano_plotter <- reactive({
         voly=input$DemoY
     }
 
-    plot <- EnhancedVolcano(DataSet,
-        lab=vol_lab,
-        title=NULL,
-        subtitle=NULL,
-        selectLab=sel_lab,
-        x=as.character(volx),
-        y=as.character(voly),
-        legendPosition=input$VLegendPos,,
-        legendLabels=c('Not selected',paste(volx), paste(voly), paste(volx, ' & ', voly, sep='')),
-        pCutoff=input$VpCutoff, 
-        FCcutoff=input$VFCcutoff,
-        pointSize=input$VpointSize,
-        labSize=input$VLabSize,
-        legendLabSize=input$VLegLabSize,
-        legendIconSize=input$VLegIconSize,
-        col=c(input$color1, input$color2, input$color3, input$color4),
-        drawConnectors=input$Connectors,
-        widthConnectors=input$Connectorwidth,
-        colConnectors=input$concolor,
-        boxedLabels=input$Boxed,
-        gridlines.major=input$majorgrid,
-        gridlines.minor=input$minorgrid
-    )
+    if(input$AxisLimits==FALSE){
+        plot <- EnhancedVolcano(DataSet,
+            lab=vol_lab,
+            title=NULL,
+            subtitle=NULL,
+            selectLab=sel_lab,
+            x=as.character(volx),
+            y=as.character(voly),
+            legendPosition=input$VLegendPos,,
+            legendLabels=c('Not selected',paste(volx), paste(voly), paste(volx, ' & ', voly, sep='')),
+            pCutoff=input$VpCutoff, 
+            FCcutoff=input$VFCcutoff,
+            pointSize=input$VpointSize,
+            labSize=input$VLabSize,
+            legendLabSize=input$VLegLabSize,
+            legendIconSize=input$VLegIconSize,
+            col=c(input$color1, input$color2, input$color3, input$color4),
+            drawConnectors=input$Connectors,
+            widthConnectors=input$Connectorwidth,
+            colConnectors=input$concolor,
+            boxedLabels=input$Boxed,
+            gridlines.major=input$majorgrid,
+            gridlines.minor=input$minorgrid
+        )
+    }
+    else if(input$AxisLimits==TRUE){
+        plot <- EnhancedVolcano(DataSet,
+            lab=vol_lab,
+            title=NULL,
+            subtitle=NULL,
+            selectLab=sel_lab,
+            x=as.character(volx),
+            y=as.character(voly),
+            legendPosition=input$VLegendPos,,
+            legendLabels=c('Not selected',paste(volx), paste(voly), paste(volx, ' & ', voly, sep='')),
+            pCutoff=input$VpCutoff, 
+            FCcutoff=input$VFCcutoff,
+            pointSize=input$VpointSize,
+            labSize=input$VLabSize,
+            legendLabSize=input$VLegLabSize,
+            legendIconSize=input$VLegIconSize,
+            col=c(input$color1, input$color2, input$color3, input$color4),
+            drawConnectors=input$Connectors,
+            widthConnectors=input$Connectorwidth,
+            colConnectors=input$concolor,
+            boxedLabels=input$Boxed,
+            gridlines.major=input$majorgrid,
+            gridlines.minor=input$minorgrid,
+            xlim=c(as.numeric(input$Vxmin), as.numeric(input$Vxmax)),
+            ylim=c(0,as.numeric(input$Vymax))
+        )
+    }
+    
 
     return(plot)
 })
@@ -66,7 +96,7 @@ observe({
 
 output$DownloadVS <- downloadHandler(
     filename=function(){
-        paste(input$VolComp,input$DownVSFormat,sep='.')
+        paste('volcano',input$DownVSFormat,sep='.')
     },
     content=function(file){   
         if(input$DownVSFormat=='jpeg'){
@@ -81,6 +111,22 @@ output$DownloadVS <- downloadHandler(
         }
         if(input$DownVSFormat=='tiff'){
             tiff(file, height=input$VHeight, width=input$VWidth, res=1000)
+            print(volcano_plotter())
+            dev.off()
+        }
+        if(input$DownVSFormat=='pdf'){
+            pdf(file, height=input$VHeight/100, width=input$VWidth/100)
+            print(volcano_plotter())
+            dev.off()
+        }
+        if(input$DownVSFormat=='svg'){
+            svg(file, height=input$VHeight/100, width=input$VWidth/100)
+            print(volcano_plotter())
+            dev.off()
+        }
+        if(input$DownVSFormat=='eps'){
+            setEPS()
+            postscript(file, height=input$VHeight/100, width=input$VWidth/100)
             print(volcano_plotter())
             dev.off()
         }

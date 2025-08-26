@@ -175,6 +175,12 @@ tagList(
                             conditionalPanel("input.AdvancedOptions",
                                 sliderInput("VpCutoff", "Y axis cutoff lines", min=0.01, max=1, step=0.01, value=0.05),
                                 sliderInput("VFCcutoff", "X axis cutoff lines", min=0, max=10, step=0.25, value=1),
+                                materialSwitch("AxisLimits", label='Axis Limit Options', value=FALSE, right=TRUE, status='info'),
+                                conditionalPanel("input.AxisLimits",
+                                    sliderInput("Vxmax", "X axis max", min=0, max=10, step=0.5, value=5),
+                                    sliderInput("Vxmin", "X axis min", min=-10, max=0, step=0.5, value=-5),
+                                    sliderInput("Vymax", "Y axis max", min=0, max=500, step=10, value=100),
+                                ),
                                 materialSwitch("majorgrid", label="Major Gridlines", value=TRUE, right=TRUE, status='info'), 
                                 materialSwitch("minorgrid", label="Minor Gridlines", value=TRUE, right=TRUE, status='info')                        
                             ),
@@ -192,7 +198,7 @@ tagList(
                                     plotOutput("volcano_out", height='100%')
                                 ),
                                 fluidRow(align='center',style="margin-top:25px;",
-                                    column(12, selectInput("DownVSFormat", label='Choose download format', choices=c('jpeg','png','tiff'))),
+                                    column(12, selectInput("DownVSFormat", label='Choose download format', choices=c('jpeg','png','tiff','pdf','svg','eps'))),
                                     column(12, downloadButton('DownloadVS', 'Download the Volcano Plot'),style="margin-bottom:50px;")
                                 )
                             )
