@@ -14,7 +14,27 @@ library(EnhancedVolcano)
 tagList(
     tags$head(
         includeHTML(("www/GA.html")),
-        tags$style(type = 'text/css','.navbar-brand{display:none;}')
+        tags$style(type = 'text/css','.navbar-brand{display:none;}'),
+        tags$style(HTML("
+            #show_help_float {
+                position: fixed;
+                bottom: 28px;
+                right: 28px;
+                z-index: 9999;
+                border-radius: 50%;
+                width: 46px;
+                height: 46px;
+                font-size: 20px;
+                padding: 0;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+            }
+        "))
+    ),
+    ## Global always-visible help button (fixed bottom-right)
+    actionButton("show_help_float", label=NULL,
+        icon=icon("circle-question"),
+        title="Help & documentation",
+        class="btn btn-info"
     ),
     fluidPage(theme = shinytheme('yeti'),
             windowTitle = "MaGIC Volcano Plot Tool",
@@ -194,7 +214,18 @@ tagList(
                     column(9,
                         tabsetPanel(id='Plot',
                             tabPanel(title='Volcano Plot', hr(),
-                                withSpinner(type=6, color='#5bc0de',  
+                                fluidRow(style="margin: 0 8px 4px 0;",
+                                    column(12, align="right",
+                                        actionButton("show_code_modal", label=NULL,
+                                            icon=icon("file-code"),
+                                            title="View R code to reproduce this plot",
+                                            class="btn btn-default btn-sm",
+                                            style="border-radius:6px; font-size:16px; padding:4px 8px;"
+                                        )
+                                    )
+                                ),
+                                hr(),
+                                withSpinner(type=6, color='#5bc0de',
                                     plotOutput("volcano_out", height='100%')
                                 ),
                                 fluidRow(align='center',style="margin-top:25px;",
