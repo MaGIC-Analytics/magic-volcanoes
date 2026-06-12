@@ -1,5 +1,4 @@
-# Hiding and showing tabs on command!
-############################################################################
+# ─── Hiding and showing tabs on command! ──────────────────────────────────────────────────
 observe({
     if(is.null(input$de_data)){
         hideTab(inputId = "NAVTABS", target = "Volcano Plots")

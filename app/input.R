@@ -40,26 +40,27 @@ InputReactive <- reactive({
             message='Please enter a valid csv or tsv file')
         )
         
-        tryCatch({
-            de_data <- fread(input$de_file$datapath)
-        },
-        error=function(e)
-        {
-            showNotification(paste(e), type='error', duration=NULL)
-        })
+        de_data <- tryCatch(
+            fread(input$de_file$datapath),
+            error=function(e)
+            {
+                showNotification(paste("File parse error:", conditionMessage(e)), type='error', duration=NULL)
+                NULL
+            })
 
     
     } else if(input$DemoData==FALSE){
-        tryCatch({
-            de_data <- fread('www/demo.csv')
-        },
-        error=function(e)
-        {
-            showNotification(paste(e), type='error', duration=NULL)
-        })
+        de_data <- tryCatch(
+            fread('www/demo.csv'),
+            error=function(e)
+            {
+                showNotification(paste("Demo data error:", conditionMessage(e)), type='error', duration=NULL)
+                NULL
+            })
 
     
     }
+    req(de_data)
     return(de_data)
 
 })
